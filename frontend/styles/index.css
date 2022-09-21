@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 24;
+}
+
+.block__element {
+    color: grey;
+}
+
+.block__button {
+    border-color: pink;
+    border-width: 5px;
+}
+
+.block__button--red {
+    background-color: red;
+}
+
+.block__button--green {
+    background-color: green;
+}
+
+.block__button--yellow {
+    background-color: yellow;
+}
+
+.block__button[name="button1"] {
+    border-radius: 69%;
+}
+
+.block__buttons {
+    display: flex;
+}
+
+.block__button:not(:last-child) {
+    margin-right: 10px;
+}
