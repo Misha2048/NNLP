@@ -1,2 +1,2 @@
-# WINM
-WINM - WINM Is Not Market. Пед проект
+# NNLP
+NNLP - NNLP Is Not Learning Platform. Пед проект
