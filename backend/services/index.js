@@ -1,3 +1,4 @@
 const UserService = require("./user");
+const TokenService = require("./token");
 
-module.exports = {UserService};
+module.exports = {UserService, TokenService};
