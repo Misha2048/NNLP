@@ -1,3 +1,4 @@
 import { UserService } from "./User";
+import { CourseService } from "./Course";
 
-export { UserService };
+export { UserService, CourseService };

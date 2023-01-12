@@ -4,17 +4,21 @@ import { UserService } from "../services";
 export class UserController {
     static async getUser(req, res, next): Promise<void> {
         const user = await UserService.getUserById(req.params.id);
+        const error = user ? "" : "Couldn't fetch data";
         createRes(res, {
-            status: 200,
+            status: error ? 400 : 200,
             data: user,
+            error,
         });
     }
 
     static async getUsers(req, res, next): Promise<void> {
         const users = await UserService.getAllUsers();
+        const error = users ? "" : "Couldn't fetch data";
         createRes(res, {
-            status: 200,
+            status: error ? 400 : 200,
             data: users,
+            error,
         })
     }
 
@@ -27,9 +31,11 @@ export class UserController {
             email,
             password,
         });
+        const error = user ? "" : "Couldn't create data";
         createRes(res, {
-            status: 201,
+            status: error ? 400 : 201,
             data: user,
+            error,
         });
     }
 
@@ -43,17 +49,21 @@ export class UserController {
             email,
             password,
         });
+        const error = user ? "" : "Couldn't update data";
         createRes(res, {
-            status: 200,
+            status: error ? 400 : 201,
             data: user,
+            error,
         })
     }
 
     static async deleteUser(req, res, next): Promise<void> {
         const user = await UserService.deleteUser(req.params.id);
+        const error = user ? "" : "Couldn't fetch data";
         createRes(res, {
-            status: 204,
+            status: error ? 400 : 204,
             data: user,
+            error,
         });
     }
 };
