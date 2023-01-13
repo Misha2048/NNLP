@@ -1,4 +1,5 @@
 import { ICourse, IUser } from "../interfaces";
+import { ILiterature } from "../interfaces";
 import { client } from "./client";
 
 export class CourseService {
@@ -10,7 +11,7 @@ export class CourseService {
     }
 
     static async getCourseById(id: String): Promise<ICourse> | null {
-        const data = await client.query(`SELECT * FROM course WHERE id=${Number(id)};`).then(result => result.rows[0]).catch(() => null);
+        const data = await client.query(`SELECT * FROM course WHERE id=${id};`).then(result => result.rows[0]).catch(() => null);
         return data;
     }
 
@@ -27,12 +28,17 @@ export class CourseService {
     }
 
     static async deleteCourse(id: String): Promise<ICourse> | null {
-        const data = await client.query(`DELETE FROM course WHERE id=${Number(id)};`).then(result => result.rows[0]).catch(() => null);
+        const data = await client.query(`DELETE FROM course WHERE id=${id};`).then(result => result.rows[0]).catch(() => null);
         return data;
     }
 
     static async getUsersOnCourse(id: String): Promise<IUser[]> | null {
-        const data = await client.query(`SELECT users.id, users.first_name, users.last_name, users.username, users.email FROM user_course JOIN users ON users.id=user_course.user_id WHERE user_course.course_id=${Number(id)};`).then(result => result.rows).catch(() => null);
+        const data = await client.query(`SELECT users.id, users.first_name, users.last_name, users.username, users.email FROM user_course JOIN users ON users.id=user_course.user_id WHERE user_course.course_id=${id};`).then(result => result.rows).catch(() => null);
+        return data;
+    }
+
+    static async getLiteratureOnCourse(id: String): Promise<ILiterature[]> | null {
+        const data = await client.query(`SELECT id, course_id, path FROM literature WHERE course_id=${id};`).then(result => result.rows).catch(() => null);
         return data;
     }
 };
