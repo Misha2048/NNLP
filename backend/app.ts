@@ -1,7 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import morgan from "morgan";
-import { UserRouter } from "./routes";
+import { CourseRouter, LiteratureRouter, UserRouter } from "./routes";
 import { client } from "./services/client";
 dotenv.config();
 
@@ -14,6 +14,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 app.use("/users", UserRouter);
+app.use("/courses", CourseRouter);
+app.use("/literature", LiteratureRouter);
 
 client.connect(err => {
     app.listen(port, () => {
