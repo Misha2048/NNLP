@@ -1,4 +1,4 @@
-import { ICourse, IUser } from "../interfaces";
+import { ICourse, IUser, IUserCourse } from "../interfaces";
 import { ILiterature } from "../interfaces";
 import { client } from "./client";
 
@@ -39,6 +39,18 @@ export class CourseService {
 
     static async getLiteratureOnCourse(id: String): Promise<ILiterature[]> | null {
         const data = await client.query(`SELECT id, course_id, path FROM literature WHERE course_id=${id};`).then(result => result.rows).catch(() => null);
+        return data;
+    }
+
+    static async subscribe(subData: IUserCourse): Promise<IUserCourse> | null {
+        const {user_id, course_id} = subData;
+        const data = await client.query(`INSERT INTO user_course(user_id, course_id) VALUES(${user_id}, ${course_id}) RETURNING *;`).then(result => result.rows[0]).catch(() => null);
+        return data;
+    }
+
+    static async unsubscribe(subData: IUserCourse): Promise<IUserCourse> | null {
+        const {user_id, course_id} = subData;
+        const data = await client.query(`DELETE FROM user_course WHERE user_id=${user_id} AND course_id=${course_id} RETURNING *;`).then(result => result.rows[0]).catch(() => null);
         return data;
     }
 };
