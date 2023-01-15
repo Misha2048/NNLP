@@ -22,6 +22,16 @@ export class UserController {
         })
     }
 
+    static async getCourses(req, res, next): Promise<void> {
+        const courses = await UserService.getCourses(req.params.id);
+        const error = courses ? "" : "Couldn't fetch data";
+        createRes(res, {
+            status: error ? 400 : 200,
+            data: courses,
+            error,
+        })
+    }
+
     static async createUser(req, res, next): Promise<void> {
         const {firstName, lastName, username, email, password} = req.body;
         const user = await UserService.createUser({
