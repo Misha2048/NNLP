@@ -81,4 +81,30 @@ export class CourseController {
             error,
         });
     }
+
+    static async subscribe(req, res, next): Promise<void> {
+        const sub = await CourseService.subscribe({
+            user_id: String(req.user.id),
+            course_id: req.params.id,
+        });
+        const error = sub ? "" : "Couldn't subscribe user to course";
+        createRes(res, {
+            status: error ? 400 : 200,
+            data: sub,
+            error,
+        });
+    }
+
+    static async unsubscribe(req, res, next): Promise<void> {
+        const sub = await CourseService.unsubscribe({
+            user_id: String(req.user.id),
+            course_id: req.params.id,
+        });
+        const error = sub ? "" : "Couldn't unsubscribe user to course";
+        createRes(res, {
+            status: error ? 400 : 200,
+            data: sub,
+            error,
+        });
+    }
 }
