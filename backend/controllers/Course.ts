@@ -71,4 +71,14 @@ export class CourseController {
             error,
         });
     }
+
+    static async getLiteratureOnCourse(req, res, next): Promise<void> {
+        const literature = await CourseService.getLiteratureOnCourse(req.params.id);
+        const error = literature ? "" : "Couldn't fetch data";
+        createRes(res, {
+            status: error ? 400 : 200,
+            data: literature,
+            error,
+        });
+    }
 }

@@ -8,7 +8,7 @@ export class UserService {
     }
 
     static async getUserById(id: String): Promise<IUser> | null {
-        const data = await client.query(`SELECT * FROM users WHERE id=${Number(id)};`).then(result => result.rows[0]).catch(() => null);
+        const data = await client.query(`SELECT * FROM users WHERE id=${id};`).then(result => result.rows[0]).catch(() => null);
         return data;
     }
 
@@ -25,7 +25,7 @@ export class UserService {
     }
 
     static async deleteUser(id: String): Promise<IUser> | null {
-        const data = await client.query(`DELETE FROM users WHERE id=${Number(id)} RETURNING *;`).then(result => result.rows[0]).catch(() => null);
+        const data = await client.query(`DELETE FROM users WHERE id=${id} RETURNING *;`).then(result => result.rows[0]).catch(() => null);
         return data;
     }
 };
