@@ -1,4 +1,4 @@
-import { IUser } from "../interfaces";
+import { ICourse, IUser } from "../interfaces";
 import { client } from "./client";
 
 export class UserService {
@@ -26,6 +26,11 @@ export class UserService {
 
     static async deleteUser(id: String): Promise<IUser> | null {
         const data = await client.query(`DELETE FROM users WHERE id=${id} RETURNING *;`).then(result => result.rows[0]).catch(() => null);
+        return data;
+    }
+
+    static async getCourses(id: String): Promise<ICourse> | null {
+        const data = await client.query(`SELECT course.id, course.name FROM course JOIN user_course ON user_course.user_id=${id} WHERE course.id=user_course.course_id`).then(result => result.rows).catch(() => null);
         return data;
     }
 };
