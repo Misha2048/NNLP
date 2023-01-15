@@ -69,7 +69,7 @@ export class UserController {
 
     static async deleteUser(req, res, next): Promise<void> {
         const user = await UserService.deleteUser(req.params.id);
-        const error = user ? "" : "Couldn't fetch data";
+        const error = user ? "" : "Couldn't delete data";
         createRes(res, {
             status: error ? 400 : 204,
             data: user,
