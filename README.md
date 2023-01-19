@@ -1,2 +1,2 @@
 # NNLP
-NNLP - NNLP Is Not Learning Platform. Пед проект
+NNLP - NNLP Is Not Learning Platform.
