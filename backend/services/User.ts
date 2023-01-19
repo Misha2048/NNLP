@@ -46,6 +46,10 @@ export class UserService {
         return (await client.query(`SELECT token FROM users WHERE id=${id};`).then(result => result.rows[0].token).catch(() => null));
     }
 
+    static async deleteToken(id: String): Promise<String> | null {
+        return (await client.query(`UPDATE users SET token='' WHERE id=${id} RETURNING token;`).then(result => result.rows).catch(() => null));
+    }
+
     static async getPassword(id: String): Promise<String> | null {
         return (await client.query(`SELECT password FROM users WHERE id=${id};`).then(result => result.rows[0].password).catch(() => null));
     }
