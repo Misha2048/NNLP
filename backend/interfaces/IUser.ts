@@ -1,7 +1,7 @@
 import { IToken } from "./IToken";
 
 export interface IUser {
-    id?: Number,
+    id?: String,
     firstName: String,
     lastName: String,
     username: String,

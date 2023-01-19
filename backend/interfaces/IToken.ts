@@ -1,4 +1,4 @@
 export interface IToken {
-    id: Number,
+    id: String,
     password: String,
 }
